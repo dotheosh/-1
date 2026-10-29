@@ -1,0 +1,22 @@
+# ---- 构建产物 ----
+[Bb]in/
+[Oo]bj/
+x64/
+Debug/
+Release/
+*.obj
+*.ilk
+*.pdb
+*.exe
+*.tlog
+*.log
+
+# ---- Visual Studio ----
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+*.sln.docstates
+
+# ---- 程序运行产生的数据 ----
+1.txt
