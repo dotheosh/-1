@@ -2,9 +2,42 @@
 #include<fstream>
 #include<string>
 
+void todo::load()
+{
+	ifstream TD;
+	TD.open("1.txt", ios::in);
+	string buf;
+	while (getline(TD, buf))
+	{
+		if (buf.empty())
+		{
+			continue;
+		}
+		tasks.push_back(Tasks((int)tasks.size() + 1, buf));	
+	}
+}
+
+void todo::save()
+{
+	ofstream TD;
+	TD.open("1.txt", ios::out);
+	if (TD.is_open())
+	{
+		for (int i = 0; i < tasks.size(); i++)
+		{
+			TD << tasks[i].works << endl;
+		}
+		cout << "保存任务完毕" << endl;
+	}
+	else
+	{
+		cout << "文件打开失败" << endl;
+	}
+}
+
 todo::todo()
 {
-
+	load();
 }
 
 void todo::show_menu()
@@ -22,34 +55,61 @@ void todo::addTodo()
 	string work;
 
 	cout << "请输入你的代办任务：" << endl;
-	cin >> work;
+	cin.ignore();
+	getline(cin, work);
 
-	ofstream TD;
-	TD.open("1.txt", ios::out);
-	if (TD.is_open())
+	if (work.empty())
 	{
-		TD << work << endl;
-		cout << "添加任务完毕" << endl;
+		cout << "任务不能为空" << endl;
+		return;
 	}
-	else
-	{
-		cout << "文件打开失败" << endl;
-	}
+	tasks.push_back(Tasks(tasks.size() + 1, work));
+	save();
 }
 
 void todo::showTodo()
 {
-	ifstream TD;
-	TD.open("1.txt", ios::in);
-
-	string buf;
-	while (TD >> buf)
+	if (tasks.empty())
 	{
-		cout << endl;
-		cout << "你目前的代办是:" << endl;
-		cout << buf << endl;
-		cout << endl;
+		cout << "暂无任务" << endl;
+		return;
 	}
+	for (auto& task : tasks)
+	{
+		task.showTask();
+	}
+}
+
+void todo::deleteTodo()
+{
+	if (tasks.empty())
+	{
+		cout << "暂无任务" << endl;
+		return;
+	}
+	int id;
+	cout << "请输入要删除的任务ID：" << endl;
+	cin >> id;
+	if (cin.fail())
+	{
+		cout << "输入无效" << endl;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "请输入数字" << endl;
+		return;
+	}
+
+	if (id < 1 || id > tasks.size())
+	{
+		cout << "无效的任务ID" << endl;
+		return;
+	}
+	tasks.erase(tasks.begin() + id - 1);
+	for (int i = 0; i < (int)tasks.size(); i++)
+		tasks[i].s_ID = i + 1;
+	showTodo();
+	save();
+	cout << "任务已删除" << endl;
 }
 
 void todo::exitTodo()

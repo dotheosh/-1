@@ -143,6 +143,8 @@
     <ClInclude Include="todo.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="task.cpp" />
+    <ClCompile Include="task.h" />
     <ClCompile Include="todo.cpp" />
     <ClCompile Include="待办.cpp" />
   </ItemGroup>

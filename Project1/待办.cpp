@@ -18,11 +18,15 @@ int main()
 		{
 		case 0:
 			td.exitTodo();//退出程序
+			break;
 		case 1:
-			td.addTodo();//添加任务
+			td.addTodo();
+			break;//添加任务
 		case 2:
-			td.showTodo();//查看任务
+			td.showTodo();
+			break;//查看任务
 		case 3:
+			td.deleteTodo();
 			break;//删除任务
 		default:
 			system("cls");

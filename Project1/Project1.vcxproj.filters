@@ -26,5 +26,11 @@
     <ClCompile Include="待办.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="task.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="task.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
